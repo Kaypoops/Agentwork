@@ -1,0 +1,20 @@
+{
+  "name": "agentwork-backend",
+  "version": "1.0.0",
+  "description": "AgentWork API server and autonomous agent — built on Unicity Sphere SDK",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "agent": "node agent.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@supabase/supabase-js": "^2.49.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "groq-sdk": "^1.3.0"
+  }
+}
