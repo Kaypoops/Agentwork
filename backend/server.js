@@ -14,7 +14,15 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_KEY
 );
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'https://agentwork-black.vercel.app',
+  ],
+  methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
+  credentials: true,
+}));
 app.use(express.json());
 
 /* ─────────────────────────────────────────────
