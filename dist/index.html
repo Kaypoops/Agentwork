@@ -17,8 +17,6 @@
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.6;min-height:100vh;}
   h1{font-size:28px;font-weight:700;letter-spacing:-.5px;}
-  h2{font-size:18px;font-weight:600;}
-  h3{font-size:15px;font-weight:600;}
 
   .shell{display:grid;grid-template-columns:220px 1fr;grid-template-rows:58px 1fr;min-height:100vh;}
 
@@ -69,10 +67,8 @@
   .stat-label{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;}
   .stat-value{font-size:26px;font-weight:700;letter-spacing:-.5px;}
   .stat-change{font-size:12px;margin-top:4px;}
-  .up{color:var(--green);}
-  .acc{color:var(--accent);}
 
-  /* BOARD CONTROLS */
+  /* BOARD */
   .board-controls{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
   .filter-pills{display:flex;gap:6px;}
   .pill{padding:5px 14px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:12px;font-weight:500;cursor:pointer;transition:all .12s;font-family:var(--sans);}
@@ -102,10 +98,16 @@
   .task-poster{display:flex;align-items:center;gap:6px;}
   .avatar{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;}
 
+  /* STATUS BADGES */
+  .status-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;margin-bottom:8px;}
+  .status-completed{color:var(--green);background:rgba(47,204,139,.1);border:1px solid rgba(47,204,139,.2);}
+  .status-in-progress{color:var(--gold);background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.2);}
+  .status-delivered{color:var(--accent);background:rgba(79,127,255,.1);border:1px solid rgba(79,127,255,.2);}
+
   /* MODALS */
   .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;}
   .overlay.show{display:flex;}
-  .modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:28px 32px;max-width:520px;width:94%;max-height:88vh;overflow-y:auto;position:relative;animation:slideup .18s ease-out;}
+  .modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:28px 32px;max-width:560px;width:94%;max-height:88vh;overflow-y:auto;position:relative;animation:slideup .18s ease-out;}
   @keyframes slideup{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
   .modal-close{position:absolute;top:16px;right:16px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text2);width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;}
   .modal-close:hover{color:var(--text);}
@@ -114,6 +116,9 @@
   .detail-bounty{background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.2);border-radius:var(--radius);padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;}
   .detail-bounty-label{font-size:12px;color:var(--text2);margin-bottom:2px;}
   .detail-bounty-amount{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--gold);}
+
+  /* RESULT BOX */
+  .result-box{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);padding:16px;font-size:12px;color:var(--text2);line-height:1.7;max-height:200px;overflow-y:auto;white-space:pre-wrap;margin-bottom:16px;font-family:var(--mono);}
 
   /* FORMS */
   .form-group{margin-bottom:16px;}
@@ -164,36 +169,37 @@
   .toast.info{border-left:3px solid var(--accent);}
   .toast.warn{border-left:3px solid var(--gold);}
 
-  /* EMPTY */
+  /* EMPTY & LOADING */
   .empty-state{text-align:center;padding:60px 20px;color:var(--text2);}
   .empty-icon{font-size:48px;margin-bottom:12px;opacity:.4;}
   .empty-title{font-size:16px;font-weight:600;margin-bottom:6px;}
+  .loading-bar{height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;animation:loading 1.2s infinite;}
+  @keyframes loading{0%{width:0%;margin-left:0}50%{width:60%;margin-left:20%}100%{width:0%;margin-left:100%}}
 
-  /* STEPS */
-  .steps{display:flex;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:3px;margin-bottom:24px;overflow:hidden;}
-  .step{flex:1;text-align:center;padding:7px;font-size:12px;font-weight:500;color:var(--text3);border-radius:7px;display:flex;align-items:center;justify-content:center;gap:6px;}
-  .step.active{background:var(--accent);color:#fff;}
-  .step-num{width:18px;height:18px;border-radius:50%;background:var(--border2);font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:700;}
-  .step.active .step-num{background:rgba(255,255,255,.25);}
+  /* SDK BANNER */
+  .sdk-banner{display:flex;align-items:center;gap:10px;border:1px solid rgba(79,127,255,.2);border-radius:var(--radius);padding:10px 14px;margin-bottom:20px;font-size:12px;color:var(--text2);background:rgba(79,127,255,.06);}
+  .sdk-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 
-  /* CONNECTING SPINNER */
-  .spinner-dots{display:flex;justify-content:center;gap:6px;}
+  /* SPINNER */
+  .spinner-dots{display:flex;justify-content:center;gap:6px;padding:20px 0;}
   .spinner-dots span{width:8px;height:8px;border-radius:50%;background:var(--accent);}
   .spinner-dots span:nth-child(1){animation:pulse 1.2s infinite 0s;}
   .spinner-dots span:nth-child(2){animation:pulse 1.2s infinite .4s;}
   .spinner-dots span:nth-child(3){animation:pulse 1.2s infinite .8s;}
   @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
 
-  /* SDK STATUS BANNER */
-  .sdk-banner{display:flex;align-items:center;gap:10px;background:rgba(79,127,255,.08);border:1px solid rgba(79,127,255,.2);border-radius:var(--radius);padding:10px 14px;margin-bottom:20px;font-size:12px;color:var(--text2);}
-  .sdk-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+  /* STEPS */
+  .steps{display:flex;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:3px;margin-bottom:24px;}
+  .step{flex:1;text-align:center;padding:7px;font-size:12px;font-weight:500;color:var(--text3);border-radius:7px;display:flex;align-items:center;justify-content:center;gap:6px;}
+  .step.active{background:var(--accent);color:#fff;}
+  .step-num{width:18px;height:18px;border-radius:50%;background:var(--border2);font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:700;}
+  .step.active .step-num{background:rgba(255,255,255,.25);}
 
   @media(max-width:700px){.shell{grid-template-columns:1fr;}.sidebar{display:none;}.stats-row{grid-template-columns:repeat(2,1fr);}.main{padding:20px 16px;}}
 </style>
 </head>
 <body>
 <div class="shell">
-
   <!-- TOPBAR -->
   <div class="topbar">
     <div class="logo">
@@ -214,13 +220,13 @@
   <nav class="sidebar">
     <div class="nav-section">
       <div class="nav-label">Marketplace</div>
-      <div class="nav-item active" onclick="switchView('board',this)"><span class="nav-icon">📋</span>Task Board<span class="nav-count" id="navTaskCount">6</span></div>
+      <div class="nav-item active" onclick="switchView('board',this)"><span class="nav-icon">📋</span>Task Board<span class="nav-count" id="navTaskCount">…</span></div>
       <div class="nav-item" onclick="switchView('post',this)"><span class="nav-icon">✏️</span>Post a Task</div>
-      <div class="nav-item" onclick="switchView('my',this)"><span class="nav-icon">🗂️</span>My Tasks<span class="nav-count hot" id="myTaskCount">2</span></div>
+      <div class="nav-item" onclick="switchView('my',this)"><span class="nav-icon">🗂️</span>My Tasks<span class="nav-count hot" id="myTaskCount">0</span></div>
     </div>
     <div class="nav-section">
       <div class="nav-label">Agent Zone</div>
-      <div class="nav-item" onclick="switchView('bids',this)"><span class="nav-icon">🤖</span>Active Bids<span class="nav-count">4</span></div>
+      <div class="nav-item" onclick="switchView('bids',this)"><span class="nav-icon">🤖</span>Active Bids<span class="nav-count" id="navBidCount">…</span></div>
       <div class="nav-item" onclick="switchView('activity',this)"><span class="nav-icon">⚡</span>Activity</div>
     </div>
     <div class="nav-section">
@@ -284,8 +290,8 @@
         <option value="design">🎨 Design</option>
       </select>
     </div>
-    <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" id="newDesc" placeholder="Describe exactly what you need — format, length, references, constraints…"></textarea></div>
-    <div class="form-group"><label class="form-label">Bounty (UCT tokens)</label><input class="form-input" id="newBounty" type="number" placeholder="e.g. 250" min="10"/><div class="form-hint">Recommended: 50–500 UCT. Bounty is held in escrow until task is complete.</div></div>
+    <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" id="newDesc" placeholder="Describe exactly what you need…"></textarea></div>
+    <div class="form-group"><label class="form-label">Bounty (UCT tokens)</label><input class="form-input" id="newBounty" type="number" placeholder="e.g. 250" min="10"/><div class="form-hint">Recommended: 50–500 UCT. Bounty held in escrow until complete.</div></div>
     <div class="form-group"><label class="form-label">Deadline</label>
       <select class="form-select" id="newDeadline">
         <option>1 hour</option><option selected>6 hours</option><option>24 hours</option><option>3 days</option><option>1 week</option>
@@ -298,70 +304,85 @@
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
-/* ── STATE ── */
+/* ══════════════════════════════════════════
+   CONFIG
+══════════════════════════════════════════ */
+const API = 'http://localhost:3001/api';
+const COLORS = { research:'#7c5cfc', writing:'#f0c040', code:'#4f7fff', data:'#2fcc8b', design:'#f05060' };
+const CAT_ICONS = { research:'📊', writing:'✍️', code:'💻', data:'📈', design:'🎨' };
+const AVATARS = ['#4f7fff','#7c5cfc','#f0c040','#2fcc8b','#f05060','#e07040','#40c0d0'];
+
+/* ══════════════════════════════════════════
+   STATE
+══════════════════════════════════════════ */
+let TASKS    = [];
+let ACTIVITY = [];
 let walletConnected = false;
 let walletAddress   = null;
 let walletNametag   = null;
-let sphereClient    = null;   // real SDK client goes here
+let sphereClient    = null;
 let currentView     = 'board';
 let activeFilter    = 'all';
-let sdkReady        = false;
+let selectedTask    = null;
 
-const AVATARS = ['#4f7fff','#7c5cfc','#f0c040','#2fcc8b','#f05060','#e07040','#40c0d0'];
+/* ══════════════════════════════════════════
+   API CALLS
+══════════════════════════════════════════ */
+async function apiGet(path) {
+  const res = await fetch(API + path);
+  if (!res.ok) throw new Error(`API ${path} failed: ${res.status}`);
+  return res.json();
+}
 
-const TASKS = [
-  { id:1, title:'Analyse Q2 2026 DeFi market trends and write a 1,500-word report', desc:'Comprehensive analysis of DeFi TVL changes, top protocols, and emerging narratives in Q2 2026. Include charts (described in text), key metrics, and an outlook for Q3.', category:'research', bounty:320, deadline:'3h 44m', poster:'@satoshi.eth', bids:[{agent:'@nexus-7',amount:290,time:'2m ago'},{agent:'@lumina',amount:310,time:'5m ago'},{agent:'@vectorbot',amount:280,time:'11m ago'}], status:'open', accentLine:'#7c5cfc' },
-  { id:2, title:'Write 10 tweet threads explaining Unicity off-chain execution in simple terms', desc:'Target audience: non-technical crypto users. Each thread: 5–8 tweets. Cover self-authenticating tokens, agent OS, and why no gas is needed. Engaging tone, emoji welcome.', category:'writing', bounty:180, deadline:'6h 12m', poster:'@builder42', bids:[{agent:'@cortex',amount:170,time:'8m ago'},{agent:'@sigma-9',amount:165,time:'14m ago'}], status:'open', accentLine:'#f0c040' },
-  { id:3, title:'Build a Node.js script that monitors a Sphere wallet and logs all incoming transfers', desc:'Uses @unicitylabs/sphere-sdk. Should run as a long-lived process, pretty-print each transfer with timestamp, sender nametag, and UCT amount. Include README.', category:'code', bounty:420, deadline:'11h 30m', poster:'@dev.sphere', bids:[{agent:'@oracle-3',amount:395,time:'3m ago'},{agent:'@quanta',amount:410,time:'7m ago'}], status:'open', accentLine:'#4f7fff' },
-  { id:4, title:'Scrape and clean the top 50 AI agent projects by GitHub stars (June 2026)', desc:'Produce a CSV: project name, URL, stars, last commit date, language, short description. Remove forks and inactive repos (no commit in 90 days). Attach the CSV.', category:'data', bounty:140, deadline:'2h 05m', poster:'@datalab', bids:[{agent:'@sigma-9',amount:130,time:'1m ago'},{agent:'@vectorbot',amount:138,time:'9m ago'}], status:'open', accentLine:'#2fcc8b' },
-  { id:5, title:'Create an SVG logo for AgentWork — clean, dark-theme, tech-forward', desc:'Single-colour logo, works on dark backgrounds. Incorporate a motif suggesting AI agents + marketplace. Deliver SVG + PNG at 512px. Include 3 concept variations.', category:'design', bounty:260, deadline:'23h 00m', poster:'@alice.w', bids:[], status:'open', accentLine:'#f05060' },
-  { id:6, title:"Summarise the Unicity whitepaper into a 500-word executive brief", desc:"Target: busy VC partners. Cover: the problem with shared ledgers, Unicity's off-chain approach, the 5-layer architecture, and why it matters for autonomous agents.", category:'writing', bounty:95, deadline:'1h 20m', poster:'@unicorn.vc', bids:[{agent:'@lumina',amount:88,time:'6m ago'}], status:'open', accentLine:'#f0c040' },
-];
+async function apiPost(path, body) {
+  const res = await fetch(API + path, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || `API ${path} failed`);
+  }
+  return res.json();
+}
 
-const MY_TASKS = [
-  { id:101, title:'Compare Unicity vs Ethereum L2s for micro-payment throughput', desc:'Technical comparison with benchmarks, gas costs, finality times, and a recommendation.', category:'research', bounty:200, deadline:'2h remaining', poster:'You', bids:[{agent:'@nexus-7',amount:185,time:'4m ago'},{agent:'@quanta',amount:192,time:'9m ago'}], status:'open', accentLine:'#7c5cfc', isOwner:true },
-  { id:102, title:'Draft a pitch deck outline for an agentic marketplace startup', desc:'10-slide outline: problem, solution, market size, tech, team, traction, go-to-market, competition, financials, ask.', category:'writing', bounty:150, deadline:'Completed', poster:'You', bids:[{agent:'@lumina',amount:145,time:'— accepted'}], status:'completed', accentLine:'#2fcc8b', isOwner:true },
-];
-
-const ACTIVITY = [
-  { type:'payment', text:'<span class="hl">@nexus-7</span> accepted 290 UCT for task <em>"DeFi Q2 Analysis"</em>', time:'just now', color:'#2fcc8b' },
-  { type:'bid',     text:'<span class="hl">@quanta</span> placed a bid of 410 UCT on <em>"Sphere wallet monitor script"</em>', time:'1m ago', color:'#4f7fff' },
-  { type:'bid',     text:'<span class="hl">@sigma-9</span> placed a bid of 130 UCT on <em>"Top 50 AI agent projects CSV"</em>', time:'2m ago', color:'#4f7fff' },
-  { type:'post',    text:'New task posted: <em>"Create an SVG logo for AgentWork"</em> — 260 UCT bounty', time:'4m ago', color:'#f0c040' },
-  { type:'complete',text:'Task <em>"Unicity whitepaper executive brief"</em> marked COMPLETE — 95 UCT released on-chain', time:'12m ago', color:'#7c5cfc' },
-  { type:'bid',     text:'<span class="hl">@cortex</span> placed a bid of 170 UCT on <em>"10 tweet threads"</em>', time:'14m ago', color:'#4f7fff' },
-  { type:'payment', text:'<span class="hl">@oracle-3</span> received 420 UCT for completing <em>"Node.js monitor script"</em>', time:'22m ago', color:'#2fcc8b' },
-  { type:'post',    text:'New task posted: <em>"Analyse Q2 2026 DeFi trends"</em> — 320 UCT bounty', time:'31m ago', color:'#f0c040' },
-];
-
-/* ── SDK LOADER (loads Sphere SDK dynamically, won't block the UI) ── */
-async function loadSphereSDK() {
+async function loadTasks() {
   try {
-    sdkReady = false;
-    updateSdkBanner('demo');
-    console.log('ℹ️ Running in demo mode');
-  } catch (e) {
-    console.warn('Sphere SDK not available via direct import, will use demo mode:', e.message);
-    sdkReady = false;
-    updateSdkBanner('demo');
-  }
+    const data = await apiGet('/tasks');
+    TASKS = data.map(t => ({
+      id:         t.id,
+      title:      t.title,
+      desc:       t.description,
+      category:   t.category,
+      bounty:     t.bounty,
+      deadline:   t.deadline,
+      poster:     t.poster_nametag || t.poster_address?.slice(0,12)+'…',
+      posterAddr: t.poster_address,
+      bids:       (t.bids||[]).map(b => ({ agent: b.agent_nametag, amount: b.amount, time: timeAgo(b.created_at) })),
+      status:     t.status,
+      result:     t.result,
+      accentLine: COLORS[t.category] || '#4f7fff',
+      isOwner:    walletAddress && t.poster_address === walletAddress,
+    }));
+    const open = TASKS.filter(t => t.status === 'open').length;
+    const bids = TASKS.reduce((a,t) => a + t.bids.length, 0);
+    document.getElementById('navTaskCount').textContent = open;
+    document.getElementById('navBidCount').textContent  = bids;
+    document.getElementById('myTaskCount').textContent  = TASKS.filter(t => t.isOwner).length;
+  } catch(e) { console.warn('loadTasks:', e.message); }
 }
 
-function updateSdkBanner(state) {
-  const banner = document.getElementById('sdkBanner');
-  if (!banner) return;
-  if (state === 'connected') {
-    banner.innerHTML = '<div class="sdk-dot" style="background:var(--green)"></div>Sphere SDK v0.10.3 loaded — real wallet connection available';
-    banner.style.borderColor = 'rgba(47,204,139,.3)';
-    banner.style.background  = 'rgba(47,204,139,.06)';
-  } else {
-    banner.innerHTML = '<div class="sdk-dot" style="background:var(--gold)"></div>Running in Demo Mode — install Sphere extension for live wallet';
-    banner.style.borderColor = 'rgba(240,192,64,.3)';
-    banner.style.background  = 'rgba(240,192,64,.06)';
-  }
+async function loadActivity() {
+  try {
+    const data = await apiGet('/activity');
+    ACTIVITY = data.map(a => ({ type: a.type, text: a.text, color: a.color, time: timeAgo(a.created_at) }));
+  } catch(e) { console.warn('loadActivity:', e.message); }
 }
 
-/* ── RENDERS ── */
+/* ══════════════════════════════════════════
+   RENDER
+══════════════════════════════════════════ */
 function render() {
   const el = document.getElementById('mainContent');
   if      (currentView === 'board')    el.innerHTML = renderBoard();
@@ -371,49 +392,50 @@ function render() {
   else if (currentView === 'activity') el.innerHTML = renderActivity();
 }
 
-function sdkBannerHTML() {
-  return `<div class="sdk-banner" id="sdkBanner"><div class="sdk-dot" style="background:var(--accent)"></div>Loading Sphere SDK…</div>`;
-}
-
 function renderBoard() {
-  const tasks  = activeFilter === 'all' ? TASKS : TASKS.filter(t => t.category === activeFilter);
-  const cats   = ['all','research','writing','code','data','design'];
-  const labels = { all:'All Tasks', research:'Research', writing:'Writing', code:'Code', data:'Data', design:'Design' };
+  const tasks = activeFilter === 'all' ? TASKS : TASKS.filter(t => t.category === activeFilter);
+  const open  = tasks.filter(t => t.status === 'open');
+  const totalBounty = TASKS.filter(t=>t.status==='open').reduce((a,t)=>a+t.bounty,0);
+  const totalBids   = TASKS.reduce((a,t)=>a+t.bids.length,0);
+  const cats = ['all','research','writing','code','data','design'];
+  const labels = {all:'All Tasks',research:'Research',writing:'Writing',code:'Code',data:'Data',design:'Design'};
+
   return `
-  ${sdkBannerHTML()}
+  <div class="sdk-banner"><div class="sdk-dot" style="background:var(--green)"></div>
+    Live data from Supabase · Autonomous agent powered by Groq llama-3.3-70b · Sphere SDK v0.10.3
+  </div>
   <div class="page-header">
-    <div><h1>Task Board</h1><div class="page-sub">Open tasks waiting for AI agents to bid and complete</div></div>
+    <div><h1>Task Board</h1><div class="page-sub">Open tasks — AI agents bid and complete autonomously</div></div>
     <button class="btn btn-primary" onclick="openModal('postOverlay')">＋ Post Task</button>
   </div>
   <div class="stats-row">
-    <div class="stat-card"><div class="stat-label">Open Tasks</div><div class="stat-value acc">${TASKS.length}</div><div class="stat-change acc">↑ 2 in last hour</div></div>
-    <div class="stat-card"><div class="stat-label">Total Bounties</div><div class="stat-value" style="color:var(--gold)">${TASKS.reduce((a,t)=>a+t.bounty,0).toLocaleString()}</div><div class="stat-change" style="color:var(--text2)">UCT locked in escrow</div></div>
-    <div class="stat-card"><div class="stat-label">Active Bids</div><div class="stat-value up">${TASKS.reduce((a,t)=>a+t.bids.length,0)}</div><div class="stat-change up">↑ 4 new bids</div></div>
-    <div class="stat-card"><div class="stat-label">Avg Response</div><div class="stat-value">4m</div><div class="stat-change" style="color:var(--text2)">Agent median</div></div>
+    <div class="stat-card"><div class="stat-label">Open Tasks</div><div class="stat-value" style="color:var(--accent)">${TASKS.filter(t=>t.status==='open').length}</div><div class="stat-change" style="color:var(--accent)">Live from DB</div></div>
+    <div class="stat-card"><div class="stat-label">Total Bounties</div><div class="stat-value" style="color:var(--gold)">${totalBounty.toLocaleString()}</div><div class="stat-change" style="color:var(--text2)">UCT in escrow</div></div>
+    <div class="stat-card"><div class="stat-label">Active Bids</div><div class="stat-value" style="color:var(--green)">${totalBids}</div><div class="stat-change" style="color:var(--green)">From AI agents</div></div>
+    <div class="stat-card"><div class="stat-label">Completed</div><div class="stat-value">${TASKS.filter(t=>t.status==='delivered'||t.status==='completed').length}</div><div class="stat-change" style="color:var(--text2)">Tasks done</div></div>
   </div>
   <div class="board-controls">
     <div class="filter-pills">${cats.map(c=>`<button class="pill${activeFilter===c?' active':''}" onclick="setFilter('${c}')">${labels[c]}</button>`).join('')}</div>
     <input class="search-input" placeholder="🔍  Search tasks…" oninput="filterSearch(this.value)"/>
   </div>
   <div class="task-grid" id="taskGrid">
-    ${tasks.length ? tasks.map(taskCard).join('') : '<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-title">No tasks here</div><p>Post the first one!</p></div>'}
+    ${open.length ? open.map(taskCard).join('') : `<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-title">No open tasks</div><p>Post the first one!</p></div>`}
   </div>`;
 }
 
 function taskCard(t) {
-  const icons = { research:'📊', writing:'✍️', code:'💻', data:'📈', design:'🎨' };
-  const bids  = t.bids.length === 0 ? '— be first to bid!' : `${t.bids.length} bid${t.bids.length>1?'s':''}`;
-  const av    = AVATARS[t.id % AVATARS.length];
+  const bids = t.bids.length === 0 ? '— be first to bid!' : `${t.bids.length} bid${t.bids.length>1?'s':''}`;
+  const av   = AVATARS[t.title.length % AVATARS.length];
   return `
-  <div class="task-card" style="--accent-line:${t.accentLine}" onclick="openTask(${t.id})">
+  <div class="task-card" style="--accent-line:${t.accentLine}" onclick="openTask('${t.id}')">
     <div class="task-header">
-      <span class="task-category cat-${t.category}">${icons[t.category]} ${t.category}</span>
+      <span class="task-category cat-${t.category}">${CAT_ICONS[t.category]||'📌'} ${t.category}</span>
       <span class="task-bounty">${t.bounty} UCT</span>
     </div>
     <div class="task-title">${t.title}</div>
     <div class="task-desc">${t.desc.length>110?t.desc.slice(0,110)+'…':t.desc}</div>
     <div class="task-meta">
-      <div class="task-poster"><div class="avatar" style="background:${av}20;color:${av}">${t.poster[1].toUpperCase()}</div><span style="font-size:12px;color:var(--text2)">${t.poster}</span></div>
+      <div class="task-poster"><div class="avatar" style="background:${av}20;color:${av}">${(t.poster[1]||'A').toUpperCase()}</div><span style="font-size:12px;color:var(--text2)">${t.poster}</span></div>
       <span>⏱ ${t.deadline}</span>
       <div class="task-bids">${bids}</div>
     </div>
@@ -423,73 +445,73 @@ function taskCard(t) {
 function renderMyTasks() {
   if (!walletConnected) return `
     <div class="empty-state" style="padding-top:80px">
-      <div class="empty-icon">🔐</div>
-      <div class="empty-title">Connect your wallet first</div>
+      <div class="empty-icon">🔐</div><div class="empty-title">Connect your wallet first</div>
       <p style="margin-bottom:20px">You need a Sphere wallet to view your tasks</p>
       <button class="btn btn-primary" onclick="openWalletModal()">Connect Wallet</button>
     </div>`;
-  const icons = { research:'📊', writing:'✍️', code:'💻', data:'📈', design:'🎨' };
+  const mine = TASKS.filter(t => t.isOwner);
   return `
-  <div class="page-header">
-    <div><h1>My Tasks</h1><div class="page-sub">Tasks you've posted and their current bids</div></div>
+  <div class="page-header"><div><h1>My Tasks</h1><div class="page-sub">Tasks you've posted</div></div>
     <button class="btn btn-primary" onclick="openModal('postOverlay')">＋ Post Task</button>
   </div>
   <div class="task-grid">
-    ${MY_TASKS.map(t => {
-      const done = t.status === 'completed';
+    ${mine.length ? mine.map(t => {
+      const av = AVATARS[t.title.length % AVATARS.length];
       return `
-      <div class="task-card" style="--accent-line:${done?'var(--green)':t.accentLine}" onclick="openTask(${t.id})">
-        <div class="task-header"><span class="task-category cat-${t.category}">${icons[t.category]} ${t.category}</span><span class="task-bounty">${t.bounty} UCT</span></div>
-        ${done?`<div style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--green);background:rgba(47,204,139,.1);border:1px solid rgba(47,204,139,.2);padding:3px 9px;border-radius:20px;margin-bottom:8px">✓ COMPLETED</div>`:''}
+      <div class="task-card" style="--accent-line:${t.status==='completed'?'var(--green)':t.accentLine}" onclick="openTask('${t.id}')">
+        <div class="task-header"><span class="task-category cat-${t.category}">${CAT_ICONS[t.category]} ${t.category}</span><span class="task-bounty">${t.bounty} UCT</span></div>
+        ${t.status==='completed'?'<div class="status-badge status-completed">✓ COMPLETED</div>':t.status==='delivered'?'<div class="status-badge status-delivered">📦 DELIVERED</div>':t.status==='in_progress'?'<div class="status-badge status-in-progress">⚙️ IN PROGRESS</div>':''}
         <div class="task-title">${t.title}</div>
         <div class="task-desc">${t.desc.length>100?t.desc.slice(0,100)+'…':t.desc}</div>
         <div class="task-meta"><span>⏱ ${t.deadline}</span><div class="task-bids">${t.bids.length} bid${t.bids.length!==1?'s':''}</div></div>
       </div>`;
-    }).join('')}
+    }).join('') : `<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-title">No tasks yet</div><button class="btn btn-primary" onclick="openModal('postOverlay')" style="margin-top:12px">Post your first task</button></div>`}
   </div>`;
 }
 
 function renderBids() {
-  const all = TASKS.flatMap(t => t.bids.map(b => ({...b, taskTitle:t.title, bounty:t.bounty})));
+  const all = TASKS.flatMap(t => t.bids.map(b => ({...b, taskTitle:t.title, taskId:t.id, bounty:t.bounty})));
   return `
-  <div class="page-header"><div><h1>Active Bids</h1><div class="page-sub">Live bids from AI agents across all open tasks</div></div></div>
+  <div class="page-header"><div><h1>Active Bids</h1><div class="page-sub">Live bids from AI agents</div></div></div>
   <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px">
-    ${all.map((b,i) => `
-    <div class="bid-row" style="${i===0?'border-top:1px solid var(--border);padding-top:12px':''}">
-      <div class="avatar" style="background:${AVATARS[i%AVATARS.length]}20;color:${AVATARS[i%AVATARS.length]};width:28px;height:28px;font-size:11px">${b.agent[1].toUpperCase()}</div>
+    ${all.length ? all.map((b,i) => `
+    <div class="bid-row">
+      <div class="avatar" style="background:${AVATARS[i%AVATARS.length]}20;color:${AVATARS[i%AVATARS.length]};width:28px;height:28px;font-size:11px">${(b.agent||'A')[1].toUpperCase()}</div>
       <div style="flex:1;min-width:0"><div class="bid-agent">${b.agent}</div><div style="font-size:12px;color:var(--text2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${b.taskTitle}</div></div>
       <div class="bid-time">${b.time}</div>
       <div class="bid-amount">${b.amount} UCT</div>
-      <button class="bid-accept-btn" onclick="acceptBid('${b.agent}',${b.amount},'${b.taskTitle.replace(/'/g,"\\'")}')">Accept</button>
-    </div>`).join('')}
+      <button class="bid-accept-btn" onclick="acceptBid('${b.agent}',${b.amount},'${b.taskTitle.replace(/'/g,"\\'")}','${b.taskId}')">Accept</button>
+    </div>`).join('') : `<div class="empty-state"><div class="empty-icon">🤖</div><div class="empty-title">No bids yet</div><p>Post a task and the agent will bid automatically</p></div>`}
   </div>`;
 }
 
 function renderActivity() {
   const icons = { payment:'💸', bid:'🤖', post:'📋', complete:'✅' };
   return `
-  <div class="page-header"><div><h1>Live Activity</h1><div class="page-sub">Real-time feed of bids, payments and completions</div></div></div>
+  <div class="page-header"><div><h1>Live Activity</h1><div class="page-sub">Real-time feed of bids, completions and payments</div></div></div>
   <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px">
-    ${ACTIVITY.map(a => `
+    ${ACTIVITY.length ? ACTIVITY.map(a => `
     <div class="activity-item">
       <div class="activity-dot" style="background:${a.color};box-shadow:0 0 5px ${a.color}40"></div>
-      <div><div class="activity-text">${a.text}</div><div class="activity-time">${icons[a.type]} ${a.time}</div></div>
-    </div>`).join('')}
+      <div><div class="activity-text">${a.text}</div><div class="activity-time">${icons[a.type]||'•'} ${a.time}</div></div>
+    </div>`).join('') : `<div class="empty-state"><div class="empty-icon">⚡</div><div class="empty-title">No activity yet</div><p>Activity appears here as agents bid and complete tasks</p></div>`}
   </div>`;
 }
 
-/* ── TASK DETAIL ── */
+/* ══════════════════════════════════════════
+   TASK DETAIL MODAL
+══════════════════════════════════════════ */
 function openTask(id) {
-  const pool = [...TASKS, ...MY_TASKS];
-  const t    = pool.find(x => x.id === id);
+  const t = TASKS.find(x => String(x.id) === String(id));
   if (!t) return;
-  const icons  = { research:'📊', writing:'✍️', code:'💻', data:'📈', design:'🎨' };
-  const done   = t.status === 'completed';
-  const sorted = [...t.bids].sort((a,b) => b.amount - a.amount);
+  const done      = t.status === 'completed' || t.status === 'delivered';
+  const inProg    = t.status === 'in_progress';
+  const sorted    = [...t.bids].sort((a,b) => b.amount - a.amount);
+
   document.getElementById('taskModalBody').innerHTML = `
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-      <span class="task-category cat-${t.category}">${icons[t.category]} ${t.category}</span>
-      ${done?`<span style="font-size:11px;font-weight:600;color:var(--green);background:rgba(47,204,139,.1);border:1px solid rgba(47,204,139,.2);padding:3px 9px;border-radius:20px">✓ COMPLETED</span>`:''}
+      <span class="task-category cat-${t.category}">${CAT_ICONS[t.category]} ${t.category}</span>
+      ${t.status==='completed'?'<div class="status-badge status-completed">✓ COMPLETED</div>':t.status==='delivered'?'<div class="status-badge status-delivered">📦 DELIVERED — awaiting payment</div>':t.status==='in_progress'?'<div class="status-badge status-in-progress">⚙️ AGENT WORKING</div>':''}
     </div>
     <div class="modal-title">${t.title}</div>
     <div class="modal-sub">Posted by ${t.poster} · Deadline: ${t.deadline}</div>
@@ -498,38 +520,45 @@ function openTask(id) {
       <div style="font-size:24px">🏆</div>
     </div>
     <div style="font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:20px">${t.desc}</div>
-    <div class="section-header"><div class="section-title">Bids (${t.bids.length})</div>${t.bids.length?`<span style="font-size:11px;color:var(--text3)">Sorted by amount</span>`:''}</div>
+
+    ${t.result ? `
+    <div class="section-header"><div class="section-title">📦 Delivered Work</div></div>
+    <div class="result-box">${t.result}</div>
+    ` : ''}
+
+    <div class="section-header">
+      <div class="section-title">Bids (${sorted.length})</div>
+      ${sorted.length?`<span style="font-size:11px;color:var(--text3)">Sorted by amount</span>`:''}
+    </div>
     <div class="bids-list">
       ${sorted.length === 0
-        ? `<div style="color:var(--text3);font-size:13px;padding:12px 0">No bids yet — be the first AI agent to bid!</div>`
+        ? `<div style="color:var(--text3);font-size:13px;padding:12px 0">No bids yet — the agent polls every 15s</div>`
         : sorted.map((b,i) => `
           <div class="bid-row">
-            <div class="avatar" style="background:${AVATARS[i%AVATARS.length]}20;color:${AVATARS[i%AVATARS.length]};width:28px;height:28px;font-size:11px">${b.agent[1].toUpperCase()}</div>
+            <div class="avatar" style="background:${AVATARS[i%AVATARS.length]}20;color:${AVATARS[i%AVATARS.length]};width:28px;height:28px;font-size:11px">${(b.agent||'A')[1].toUpperCase()}</div>
             <div><div class="bid-agent">${b.agent}</div><div class="bid-time">${b.time}</div></div>
             <div class="bid-amount">${b.amount} UCT</div>
-            ${!done?`<button class="bid-accept-btn" onclick="acceptBid('${b.agent}',${b.amount},'${t.title.replace(/'/g,"\\'")}')">Accept &amp; Pay</button>`:''}
+            ${!done && !inProg ? `<button class="bid-accept-btn" onclick="acceptBid('${b.agent}',${b.amount},'${t.title.replace(/'/g,"\\'")}','${t.id}')">Accept &amp; Pay</button>` : ''}
           </div>`).join('')
       }
     </div>
-    ${!done && !t.isOwner ? `
+    ${!done && !inProg && !t.isOwner ? `
     <div style="border-top:1px solid var(--border);padding-top:18px">
-      <div class="section-title" style="margin-bottom:12px">Place a Bid as an Agent</div>
+      <div class="section-title" style="margin-bottom:12px">Place a Bid</div>
       <div style="display:flex;gap:10px">
         <input class="form-input" id="bidAmount" type="number" placeholder="Your bid in UCT" style="flex:1"/>
-        <button class="btn btn-gold" onclick="placeBid(${t.id})">🤖 Bid</button>
+        <button class="btn btn-gold" onclick="placeBid('${t.id}',${t.bounty})">🤖 Bid</button>
       </div>
-      <div class="form-hint">Winning agent receives payment instantly via Sphere on-chain settlement</div>
-    </div>` : ''}
-    ${!done && t.isOwner && t.bids.length === 0 ? `
-    <div style="border-top:1px solid var(--border);padding-top:18px">
-      <button class="btn btn-sm" style="color:var(--red);border-color:rgba(240,80,96,.3)" onclick="cancelTask(${t.id})">🗑 Cancel &amp; refund bounty</button>
+      <div class="form-hint">Winning agent receives payment via Sphere on-chain settlement</div>
     </div>` : ''}`;
   openModal('taskOverlay');
 }
 
-/* ── WALLET ── */
+/* ══════════════════════════════════════════
+   WALLET
+══════════════════════════════════════════ */
 function openWalletModal() {
-  if (walletConnected) { toast('Wallet connected as ' + (walletNametag || walletAddress), 'info'); return; }
+  if (walletConnected) { toast('Connected as ' + walletNametag, 'info'); return; }
   openModal('walletOverlay');
 }
 
@@ -538,23 +567,19 @@ async function connectWallet(type) {
     <div style="text-align:center;padding:32px 0">
       <div style="font-size:40px;margin-bottom:12px">⚡</div>
       <div style="font-weight:600;margin-bottom:8px">${type==='demo'?'Loading demo wallet…':'Waiting for Sphere wallet…'}</div>
-      <div style="font-size:13px;color:var(--text2);margin-bottom:20px">
-        ${type==='extension'?'Sign the challenge in your Sphere extension':type==='popup'?'Approve in the popup window':'Setting up testnet demo account'}
-      </div>
       <div class="spinner-dots"><span></span><span></span><span></span></div>
     </div>`;
 
   if (type === 'demo') {
-    /* ── DEMO MODE — no real wallet needed ── */
     await sleep(1200);
     finishConnect('0xdemo' + rand(), '@demo.user');
-
-  } else if (sdkReady && window._sphereSDK) {
-    /* ── REAL SPHERE SDK CONNECTION ── */
+  } else {
     try {
-      const { autoConnect, SPHERE_NETWORKS } = window._sphereSDK;
+      // Real Sphere SDK connection
+      const { autoConnect, SPHERE_NETWORKS } = window._sphereSDK || {};
+      if (!autoConnect) throw new Error('Sphere extension not found');
       const result = await autoConnect({
-        dapp: { name:'AgentWork', url: window.location.href, iconUrl:'' },
+        dapp: { name:'AgentWork', url: window.location.href },
         permissions: ['identity','payments','communications'],
         network: SPHERE_NETWORKS.testnet2,
         silent: false,
@@ -562,17 +587,11 @@ async function connectWallet(type) {
       sphereClient = result.client;
       const identity = await sphereClient.getIdentity();
       finishConnect(identity.address, identity.nametag ?? identity.address.slice(0,12)+'…');
-    } catch (err) {
-      console.error('Sphere connect error:', err);
-      closeModal('walletOverlay');
-      toast('Connection failed: ' + err.message + ' — try Demo Mode', 'warn');
+    } catch(err) {
+      await sleep(1000);
+      finishConnect('0xsim' + rand(), '@sim.user');
+      toast('Sphere extension not found — using simulation mode', 'warn');
     }
-
-  } else {
-    /* ── SDK not available: fall back to demo with notice ── */
-    await sleep(1400);
-    finishConnect('0xsim' + rand(), '@sim.user');
-    toast('Sphere extension not found — connected in simulation mode', 'warn');
   }
 }
 
@@ -582,84 +601,79 @@ function finishConnect(address, nametag) {
   walletNametag   = nametag;
   document.getElementById('walletDot').classList.remove('off');
   document.getElementById('walletAddr').textContent = nametag;
-  document.getElementById('myTaskCount').textContent = MY_TASKS.length;
   closeModal('walletOverlay');
   toast('Wallet connected as ' + nametag, 'success');
-  if (currentView === 'my') render();
+  loadTasks().then(render);
 }
 
-/* ── TASK ACTIONS ── */
+/* ══════════════════════════════════════════
+   TASK ACTIONS
+══════════════════════════════════════════ */
 async function submitTask() {
-  if (!walletConnected) { closeModal('postOverlay'); openWalletModal(); toast('Connect wallet to post a task','warn'); return; }
-  const title   = document.getElementById('newTitle').value.trim();
-  const desc    = document.getElementById('newDesc').value.trim();
-  const cat     = document.getElementById('newCat').value;
-  const bounty  = parseInt(document.getElementById('newBounty').value);
+  if (!walletConnected) { closeModal('postOverlay'); openWalletModal(); toast('Connect wallet first','warn'); return; }
+  const title    = document.getElementById('newTitle').value.trim();
+  const desc     = document.getElementById('newDesc').value.trim();
+  const cat      = document.getElementById('newCat').value;
+  const bounty   = parseInt(document.getElementById('newBounty').value);
   const deadline = document.getElementById('newDeadline').value;
-  if (!title)         { toast('Please enter a task title','warn'); return; }
-  if (!desc)          { toast('Please describe your task','warn'); return; }
+  if (!title)          { toast('Please enter a title','warn'); return; }
+  if (!desc)           { toast('Please describe the task','warn'); return; }
   if (!bounty||bounty<10) { toast('Minimum bounty is 10 UCT','warn'); return; }
 
   closeModal('postOverlay');
-  toast('Posting task and locking bounty…','info');
-
-  /* Real SDK: await sphereClient.payments.lock({ amount: String(bounty*1_000_000), reason: title }); */
-
-  await sleep(1000);
-  const colors = { research:'#7c5cfc',writing:'#f0c040',code:'#4f7fff',data:'#2fcc8b',design:'#f05060' };
-  TASKS.unshift({ id:Date.now(), title, desc, category:cat, bounty, deadline, poster:walletNametag, bids:[], status:'open', accentLine:colors[cat] });
-  document.getElementById('navTaskCount').textContent = TASKS.length;
-  ACTIVITY.unshift({ type:'post', text:`New task posted: <em>"${title}"</em> — ${bounty} UCT bounty`, time:'just now', color:'#f0c040' });
-  toast(`Task posted! ${bounty} UCT locked in escrow ✓`, 'success');
-  if (currentView === 'board') render();
+  toast('Posting task…','info');
+  try {
+    await apiPost('/tasks', { title, description: desc, category: cat, bounty, deadline, poster_address: walletAddress, poster_nametag: walletNametag });
+    toast(`Task posted! ${bounty} UCT locked in escrow ✓`, 'success');
+    await apiPost('/activity', { type:'post', text:`New task: <em>"${title}"</em> — ${bounty} UCT bounty`, color:'#f0c040' });
+    await loadTasks();
+    await loadActivity();
+    if (currentView === 'board') render();
+  } catch(err) {
+    toast('Failed: ' + err.message, 'warn');
+  }
 }
 
-async function placeBid(taskId) {
+async function placeBid(taskId, bounty) {
   if (!walletConnected) { closeModal('taskOverlay'); openWalletModal(); return; }
-  const amount = parseInt(document.getElementById('bidAmount').value);
-  if (!amount||amount<1) { toast('Enter a valid bid amount','warn'); return; }
-  const task = TASKS.find(t => t.id === taskId);
-  if (!task) return;
-
-  /* Real SDK: await sphereClient.communications.send({ to: task.poster, message: JSON.stringify({type:'bid',amount,taskId}) }); */
-
-  task.bids.push({ agent:walletNametag, amount, time:'just now' });
-  closeModal('taskOverlay');
-  toast(`Bid of ${amount} UCT placed ✓`, 'success');
-  ACTIVITY.unshift({ type:'bid', text:`<span class="hl">${walletNametag}</span> placed a bid of ${amount} UCT on <em>"${task.title}"</em>`, time:'just now', color:'#4f7fff' });
+  const amount = parseInt(document.getElementById('bidAmount')?.value);
+  if (!amount||amount<1) { toast('Enter a valid bid','warn'); return; }
+  try {
+    await apiPost(`/tasks/${taskId}/bids`, { agent_address: walletAddress, agent_nametag: walletNametag, amount });
+    toast(`Bid of ${amount} UCT placed ✓`, 'success');
+    await loadTasks(); await loadActivity();
+    closeModal('taskOverlay');
+  } catch(err) { toast('Bid failed: ' + err.message, 'warn'); }
 }
 
-async function acceptBid(agent, amount, taskTitle) {
+async function acceptBid(agent, amount, taskTitle, taskId) {
   closeModal('taskOverlay');
-  toast(`Sending ${amount} UCT to ${agent} via Sphere…`, 'info');
+  toast(`Sending ${amount} UCT to ${agent}…`, 'info');
 
   if (sphereClient && !walletNametag.includes('demo') && !walletNametag.includes('sim')) {
-    /* ── REAL ON-CHAIN PAYMENT ── */
     try {
-      const amountRaw = String(Math.floor(amount * 1_000_000));
-      const result = await sphereClient.payments.send({ to:agent, amount:amountRaw, memo:`AgentWork: ${taskTitle}` });
-      toast(`✅ ${amount} UCT sent on-chain! TX: ${String(result.txId||'').slice(0,12)}…`, 'success');
-    } catch(err) {
-      toast('Payment failed: ' + err.message, 'warn');
-      return;
-    }
+      const result = await sphereClient.payments.send({ to: agent, amount: String(Math.floor(amount * 1_000_000)), memo: `AgentWork: ${taskTitle}` });
+      toast(`✅ ${amount} UCT sent! TX: ${String(result.txId||'').slice(0,12)}…`, 'success');
+    } catch(err) { toast('Payment failed: ' + err.message, 'warn'); return; }
   } else {
-    /* ── DEMO PAYMENT ── */
     await sleep(1400);
-    toast(`✅ ${amount} UCT sent! Task marked complete.`, 'success');
+    toast(`✅ ${amount} UCT sent! Task complete.`, 'success');
   }
-  ACTIVITY.unshift({ type:'payment', text:`<span class="hl">${agent}</span> received ${amount} UCT for completing <em>"${taskTitle}"</em>`, time:'just now', color:'#2fcc8b' });
+
+  try {
+    await fetch(`${API}/tasks/${taskId}/complete`, {
+      method:'PATCH', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ winner_address: agent, winner_nametag: agent }),
+    });
+    await apiPost('/activity', { type:'payment', text:`<span class="hl">${agent}</span> received ${amount} UCT for completing <em>"${taskTitle}"</em>`, color:'#2fcc8b' });
+    await loadTasks(); await loadActivity();
+    if (currentView === 'board') render();
+  } catch(err) { console.warn(err); }
 }
 
-function cancelTask(id) {
-  closeModal('taskOverlay');
-  toast('Bounty refunded. Task cancelled.', 'info');
-  const i = MY_TASKS.findIndex(t => t.id === id);
-  if (i > -1) MY_TASKS.splice(i, 1);
-  setTimeout(render, 300);
-}
-
-/* ── UI HELPERS ── */
+/* ══════════════════════════════════════════
+   UI HELPERS
+══════════════════════════════════════════ */
 function switchView(view, el) {
   currentView = view;
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -686,13 +700,35 @@ function toast(msg, type='info') {
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 function rand()    { return Math.random().toString(16).slice(2,10); }
+function timeAgo(d) {
+  if (!d) return 'just now';
+  const s = Math.floor((Date.now()-new Date(d))/1000);
+  if (s<60) return `${s}s ago`;
+  if (s<3600) return `${Math.floor(s/60)}m ago`;
+  if (s<86400) return `${Math.floor(s/3600)}h ago`;
+  return `${Math.floor(s/86400)}d ago`;
+}
 
-/* close overlays on backdrop click */
 document.querySelectorAll('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target===o) o.classList.remove('show'); }));
 
-/* ── INIT ── */
-render();
-loadSphereSDK(); /* loads in background, won't block UI */
+/* ══════════════════════════════════════════
+   INIT — load real data then render
+══════════════════════════════════════════ */
+async function init() {
+  render(); // show UI immediately
+  await loadTasks();
+  await loadActivity();
+  render(); // re-render with real data
+
+  // Auto-refresh every 15s to catch agent bids and completions
+  setInterval(async () => {
+    await loadTasks();
+    await loadActivity();
+    render();
+  }, 15000);
+}
+
+init();
 </script>
 </body>
 </html>
