@@ -307,7 +307,9 @@
 /* ══════════════════════════════════════════
    CONFIG
 ══════════════════════════════════════════ */
-const API = 'http://localhost:3001/api';
+const API = window.location.hostname === 'localhost'
+  ? 'http://localhost:3001/api'
+  : 'https://agentwork-product.up.railway.app/api';
 const COLORS = { research:'#7c5cfc', writing:'#f0c040', code:'#4f7fff', data:'#2fcc8b', design:'#f05060' };
 const CAT_ICONS = { research:'📊', writing:'✍️', code:'💻', data:'📈', design:'🎨' };
 const AVATARS = ['#4f7fff','#7c5cfc','#f0c040','#2fcc8b','#f05060','#e07040','#40c0d0'];
