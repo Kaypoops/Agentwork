@@ -1,7 +1,13 @@
 {
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "cd backend && npm install"
+    "buildCommand": "cd backend && npm install",
+    "nixpacksPlan": {
+      "providers": ["node"],
+      "variables": {
+        "NODE_VERSION": "22"
+      }
+    }
   },
   "deploy": {
     "startCommand": "node backend/server.js",
